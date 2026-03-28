@@ -1,95 +1,71 @@
 # AI Summary API
 
-API untuk menghasilkan rangkuman artikel ilmiah menggunakan AI.
+API untuk generate rangkuman artikel ilmiah menggunakan AI. **Tidak memerlukan API key!**
 
-## Deploy ke Vercel (Recommended)
+## ✅ CORS Enabled
 
-### Cara 1: Deploy langsung dari GitHub
+API ini sudah dikonfigurasi untuk menerima request dari domain manapun (CORS enabled).
 
-1. Upload folder ini ke repository GitHub Anda
-2. Buka [vercel.com](https://vercel.com) dan login
-3. Klik "New Project" → Import repository Anda
+## 🚀 Deploy ke Vercel
+
+### Cara 1: Import dari GitHub
+1. Upload folder ini ke repository GitHub
+2. Buka [vercel.com](https://vercel.com)
+3. Klik "New Project" → Import repository
 4. Klik "Deploy"
-5. Setelah deploy, Anda akan mendapat URL seperti: `https://nama-project.vercel.app`
-6. Gunakan URL tersebut di JavaScript Anda:
-   ```javascript
-   const AI_SUMMARY_API_URL = 'https://nama-project.vercel.app/api/ai-summary';
-   ```
 
-### Cara 2: Deploy menggunakan Vercel CLI
+### Cara 2: Drag & Drop
+1. Buka [vercel.com/new](https://vercel.com/new)
+2. Drag & drop folder ini
+3. Tunggu hingga selesai
 
-```bash
-# Install Vercel CLI
-npm install -g vercel
+## 📍 Endpoint
 
-# Masuk ke folder ini
-cd ai-summary-api
+| Method | Path | Description |
+|--------|------|-------------|
+| POST | `/api/ai-summary` | Generate rangkuman artikel |
+| GET | `/api/ai-summary` | Cek status API |
 
-# Deploy
-vercel
+## 📝 Request Format
 
-# Ikuti instruksi di layar
+```javascript
+fetch('https://your-app.vercel.app/api/ai-summary', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    title: 'Judul artikel',
+    authors: 'Penulis (optional)',
+    abstract: 'Abstract artikel'
+  })
+})
+.then(res => res.json())
+.then(data => console.log(data.summary))
 ```
 
-## Deploy ke Server Sendiri (Node.js/Bun)
+## 📦 Response Format
 
-```bash
-# Install dependencies
-npm install
-# atau
-bun install
-
-# Jalankan development server
-npm run dev
-# atau
-bun run dev
-
-# Build untuk production
-npm run build
-npm start
-```
-
-## Penggunaan API
-
-### Endpoint
-```
-POST /api/ai-summary
-```
-
-### Request Body
-```json
-{
-  "title": "Judul Artikel",
-  "authors": "Penulis",
-  "abstract": "Abstract artikel..."
-}
-```
-
-### Response
 ```json
 {
   "status": "ok",
   "summary": "Rangkuman artikel dalam bahasa Indonesia...",
-  "title": "Judul Artikel",
+  "title": "Judul artikel",
   "authors": "Penulis"
 }
 ```
 
-## Integrasi dengan SmartCite Manager
+## 🔧 Integrasi dengan SmartCite Manager
 
-Ubah URL di JavaScript Anda:
+Setelah deploy, update URL di JavaScript:
 
 ```javascript
-const AI_SUMMARY_API_URL = 'https://URL-ANDA/api/ai-summary';
+const AI_SUMMARY_API_URL = 'https://your-app.vercel.app/api/ai-summary';
 ```
 
-Contoh:
-```javascript
-const AI_SUMMARY_API_URL = 'https://ai-summary-api.vercel.app/api/ai-summary';
-```
+## ⚠️ Requirements
 
-## Catatan Penting
+- Node.js 18+
+- z-ai-web-dev-sdk (otomatis terinstall saat deploy)
 
-- **Tidak perlu API Key** - API ini menggunakan SDK internal
-- **Gratis** - Tidak ada biaya tambahan
-- **CORS Enabled** - Bisa diakses dari domain manapun
+## 📄 License
+
+MIT License
